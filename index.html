@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Registry</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        /*background-color: #d3dce8; Dusty blue background */
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      .column {
+        flex-basis: calc(25% - 20px);
+        margin-bottom: 20px;
+      }
+      .heading {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .item {
+        display: block;
+        margin-bottom: 5px;
+        color: #333; /* Default color */
+        text-decoration: none;
+      }
+      .item.clicked {
+        color: green; /* Color when clicked */
+      }
+      .purchased {
+        float: right;
+        color: grey;
+        font-size: 12px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="heading">Wedding Registry Checklist</h1>
+    <div class="container">
+      <div class="column">
+        <h2 class="heading">Kitchen Appliances</h2>
+        <ul>
+          <li>
+            <a href="#" class="item" data-id="1" onclick="markAsPurchased(this)"
+              >Blender<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="2" onclick="markAsPurchased(this)"
+              >Juicer<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="3" onclick="markAsPurchased(this)"
+              >Coffee maker<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="4" onclick="markAsPurchased(this)"
+              >Slow cooker<span class="purchased">Purchased</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h2 class="heading">Cookware</h2>
+        <ul>
+          <li>
+            <a href="#" class="item" data-id="5" onclick="markAsPurchased(this)"
+              >Roasting pan with grill rack<span class="purchased"
+                >Purchased</span
+              ></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="6" onclick="markAsPurchased(this)"
+              >Casserole dish set<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="7" onclick="markAsPurchased(this)"
+              >Dutch oven<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="item" data-id="8" onclick="markAsPurchased(this)"
+              >Fluted Bakeware set<span class="purchased">Purchased</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h2 class="heading">Dinnerware</h2>
+        <ul>
+          <li>
+            <a href="#" class="item" data-id="9" onclick="markAsPurchased(this)"
+              >Glasses<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="10"
+              onclick="markAsPurchased(this)"
+              >Dinner plates<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="11"
+              onclick="markAsPurchased(this)"
+              >Dessert plates<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="12"
+              onclick="markAsPurchased(this)"
+              >Square bowls<span class="purchased">Purchased</span></a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="column">
+        <h2 class="heading">Utensils and Accessories</h2>
+        <ul>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="13"
+              onclick="markAsPurchased(this)"
+              >Cooking utensil set<span class="purchased">Purchased</span></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="14"
+              onclick="markAsPurchased(this)"
+              >Knife set with knife holder<span class="purchased"
+                >Purchased</span
+              ></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="15"
+              onclick="markAsPurchased(this)"
+              >Measuring cups and spoon set<span class="purchased"
+                >Purchased</span
+              ></a
+            >
+          </li>
+          <li>
+            <a
+              href="#"
+              class="item"
+              data-id="16"
+              onclick="markAsPurchased(this)"
+              >Stainless steel mixing bowl set<span class="purchased"
+                >Purchased</span
+              ></a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script>
+      // Object to store the purchased status for each item
+      var purchasedStatus = {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+        6: false,
+        7: false,
+        8: false,
+        9: false,
+        10: false,
+        11: false,
+        12: false,
+        13: false,
+        14: false,
+        15: false,
+        16: false,
+      };
+
+      // Function to mark an item as purchased or not purchased
+      function markAsPurchased(item) {
+        var itemId = item.getAttribute("data-id");
+        if (!purchasedStatus[itemId]) {
+          // If the item is not purchased, mark it as purchased
+          purchasedStatus[itemId] = true;
+        } else {
+          // If the item is already purchased, mark it as not purchased
+          purchasedStatus[itemId] = false;
+        }
+        updateUI();
+      }
+
+      // Function to update the UI based on the purchased status
+      function updateUI() {
+        var items = document.querySelectorAll(".item");
+        items.forEach(function (item) {
+          var itemId = item.getAttribute("data-id");
+          var purchased = purchasedStatus[itemId];
+          var purchasedElement = item.querySelector(".purchased");
+          if (purchased) {
+            item.classList.add("clicked");
+            purchasedElement.style.display = "inline";
+          } else {
+            item.classList.remove("clicked");
+            purchasedElement.style.display = "none";
+          }
+        });
+      }
+
+      // Initial update of the UI
+      updateUI();
+    </script>
+  </body>
+</html>
